@@ -1,11 +1,12 @@
 package com.Api.tcc.dtos;
 
+import java.util.UUID;
+
 public record UserDto(
-                        Long id,
+                        UUID id,
                         String email,
                         String name,
-                        String password,
-                        String tasks
+                        String password
                         ) {
 
 }

@@ -1,7 +1,7 @@
 package com.Api.tcc.controllers;
 
 import java.util.List;
-
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +33,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
     }
 
-    /* @GetMapping("/{id}")
-    public ResponseEntity<Optional<UserModel>> getUserById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
-    } */
-
     @GetMapping("/{email}")
     public ResponseEntity<UserModel> getUserByEmail(@PathVariable String email){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByEmail(email));
@@ -49,14 +44,14 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    public ResponseEntity<String> deleteUser(@PathVariable UUID id){
         userService.deleteUser(id);
 
         return ResponseEntity.status(HttpStatus.OK).body("User Excluido!");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserModel> updateUser(@PathVariable Long id,@RequestBody UserDto userDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.updateUserTasks(id, userDto));
+    public ResponseEntity<UserModel> updateUser(@PathVariable UUID id,@RequestBody UserDto userDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.updateUser(id, userDto));
     }
 }
