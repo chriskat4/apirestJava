@@ -13,4 +13,7 @@ import com.Api.tcc.models.TaskModel;
 public interface TaskRepository extends JpaRepository<TaskModel, UUID>{
     @Query(value = "SELECT * FROM tb_task WHERE user_id = :id", nativeQuery = true)
     List<TaskModel> findTaskByUserId(UUID id);
+
+    @Query(value = "SELECT * FROM tb_task WHERE task = :task", nativeQuery = true )
+    TaskModel findTaskByTask(String task);
 }

@@ -11,12 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Api.tcc.dtos.TaskDto;
+import com.Api.tcc.dtos.TaskUpdateRequest;
+import com.Api.tcc.dtos.UserDto;
 import com.Api.tcc.models.TaskModel;
+import com.Api.tcc.models.UserModel;
 import com.Api.tcc.services.TaskService;
 
 @RestController
@@ -41,6 +45,11 @@ public class TaskController {
     @PostMapping
     public ResponseEntity<String> saveTask(@RequestBody TaskDto taskDto){
         return ResponseEntity.status(HttpStatus.OK).body(taskService.saveTasks(taskDto));
+    }
+
+     @PutMapping("/{id}")
+    public ResponseEntity<TaskModel> updateTask(@PathVariable UUID id,@RequestBody TaskUpdateRequest taskUpdateRequest){
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.updateTask(id, taskUpdateRequest));
     }
 
 

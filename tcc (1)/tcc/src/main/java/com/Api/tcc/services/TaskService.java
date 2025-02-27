@@ -13,6 +13,7 @@ import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.Api.tcc.dtos.TaskDto;
+import com.Api.tcc.dtos.TaskUpdateRequest;
 import com.Api.tcc.models.TaskModel;
 import com.Api.tcc.models.UserModel;
 import com.Api.tcc.repositories.TaskRepository;
@@ -45,10 +46,23 @@ public class TaskService {
             TaskModel task = new TaskModel();
             task.setTask(t);
             task.setUser(userRepository.findById(taskDto.userID()).get());
+            task.setDone(taskDto.done());
             taskRepository.save(task);
         }
 
         return "Saved";
+    }
+
+    public TaskModel updateTask(UUID id, TaskUpdateRequest taskUpdateRequest){
+
+        TaskModel task = new TaskModel();
+
+        task.setId(id);
+        task.setDone(taskUpdateRequest.done());
+        task.setTask(taskUpdateRequest.task());
+        task.setUser(userRepository.findById(taskUpdateRequest.userID()).get());
+
+        return task;
     }
 
 }

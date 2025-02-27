@@ -1,6 +1,7 @@
 package com.Api.tcc.models;
 
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,8 +33,11 @@ public class TaskModel implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    
+
     @Column(nullable = false)
+    private Boolean done;
+    
+    @Column(nullable = false, unique = true)
     private String task;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
